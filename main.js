@@ -2,61 +2,45 @@
 var canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+var deltaX = 0;
+var deltaY = 0;
+x = 200
+y =200
+var context = canvas.getContext('2d');
 
-var c = canvas.getContext('2d');
-
-D = 0;
-A = 0;
-vx = 0;
-x=200;
-
-
-
-document.addEventListener("keyup", CalcularVx);
-
-function CalcularVx(){
-
-    if (event.keyCode === 65) {
-       // alert(' A');
-        A = 1
-
-    }
-    else{
-        A= 0
-        vx= 0
-    }
-
-     if (event.keyCode === 68) {
-        //alert('D');
-        D = 1;
-    }
-    else{
-        D=0;
-        vx=0
-        
-    }
-
-    vx = (D - A) * 20
-
-
-    console.log(vx)
-    
-    return vx;
-
-    
-}
+window.addEventListener("keydown", moveSomething, false);
+  
+function moveSomething(e) {
+    switch(e.keyCode) {
+        case 65:
+          deltaX -= 50;
+          break;
+        case 87:
+          deltaY -= 50;
+          break;
+        case 68:
+          deltaX += 50;
+          break;
+        case 83:
+          deltaY += 50;
+          break;  
+    }   
+    animateQuadrado();
+}       
 
 function animateQuadrado(){
 
-requestAnimationFrame(animateQuadrado)
+  requestAnimationFrame(animateQuadrado)
+  
+  context.clearRect(0,0,window.innerWidth,window.innerHeight)
+  
+  context.fillStyle = "#d22200";
+  context.fillRect(x+deltaX,y+deltaY,200,200)
+  
+  
+  }
+  
+  animateQuadrado();
 
-c.clearRect(0,0,innerWidth,innerHeight)
 
-c.fillStyle = "#d22200";
-c.fillRect(x,200,200,200)
 
-x = x+vx;
-
-}
-
-animateQuadrado();
