@@ -5,8 +5,10 @@ canvas.height = window.innerHeight;
 var deltaX = 0;
 var deltaY = 0;
 x = 200
-y =200
+y = 200
 var context = canvas.getContext('2d');
+
+
 
 window.addEventListener("keydown", moveSomething, false);
   
@@ -26,6 +28,13 @@ function moveSomething(e) {
           break;  
     }   
     animateQuadrado();
+    animateMoita();
+    animateInimigo();
+    console.log( " | vx = " + (x + deltaX) + " | vy = " + (y + deltaY) )
+
+
+
+
 }       
 
 function animateQuadrado(){
@@ -33,14 +42,59 @@ function animateQuadrado(){
   requestAnimationFrame(animateQuadrado)
   
   context.clearRect(0,0,window.innerWidth,window.innerHeight)
-  
-  context.fillStyle = "#d22200";
-  context.fillRect(x+deltaX,y+deltaY,200,200)
-  
-  
+  xfinal = x+deltaX
+  yfinal = y + deltaY
+  context.fillStyle = "#808080";
+  if ((xfinal)>=800&&(yfinal)>=100){
+    xfinal = xfinal - deltaX;
+    yfinal = yfinal - deltaY;
+    
   }
+
+
+  context.fillRect(xfinal,yfinal,200,200)
+
+ 
+  }
+
+ function animateMoita(){
+
+    requestAnimationFrame(animateMoita)
+    
+    
+    context.fillStyle = "#008000";
+    context.fillRect(300,300,300,200)
+    
+    
+    }
+
+  function animateInimigo(){
+
+    requestAnimationFrame(animateInimigo)
+    
+    
+    context.fillStyle = "#d22200";
+    context.fillRect(800,100,100,100)
+    
+    
+    }
+
+   
+
+    
+
+
+
+  
+
   
   animateQuadrado();
+  animateMoita();
+  animateInimigo();
+
+
+  
+  
 
 
 
